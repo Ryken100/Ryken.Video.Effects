@@ -2,7 +2,7 @@
 A .NET UWP library to make it a little easier for you to render videos with Win2D effects.
 
 # Using this component
-All code below this point assumes you've imported the `Ryken.Video.Effects` namespace.
+All code below this point assumes you've imported the `Ryken.Video.Effects` and `Ryken.Video.Effects.Core` namespaces.
 
 ## Step 1: Register your MediaPlayer/MediaElement
 First you need to register your video playback method to receive effects, whether it be `MediaPlayer`, `MediaElement` or `MediaClip`.
