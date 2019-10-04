@@ -122,6 +122,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FrameServerHandler.cs" />
+    <Compile Include="GaussianBlurEffectHandler.cs" />
     <Compile Include="InterpolationEffectHandler.cs" />
     <Compile Include="IVideoEffectHandler.cs" />
     <Compile Include="IVideoEffectHandlerArgs.cs" />
