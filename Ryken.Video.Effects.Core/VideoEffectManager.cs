@@ -13,7 +13,7 @@ using Windows.Media.Playback;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Ryken.Video.Effects
+namespace Ryken.Video.Effects.Core
 {
     public static class VideoEffectManager
     {

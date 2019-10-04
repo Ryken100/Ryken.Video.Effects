@@ -18,7 +18,7 @@ using Microsoft.Graphics.Canvas.UI.Composition;
 using Windows.Graphics;
 using Windows.Graphics.DirectX;
 
-namespace Ryken.Video.Effects
+namespace Ryken.Video.Effects.Core
 {
     class FrameServerHandler : IDisposable
     {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.Graphics.DirectX.Direct3D11;
 
-namespace Ryken.Video.Effects
+namespace Ryken.Video.Effects.Core
 {
     public interface IVideoEffectHandlerArgs
     {

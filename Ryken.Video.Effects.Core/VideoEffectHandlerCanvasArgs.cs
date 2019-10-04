@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ryken.Video.Effects
+namespace Ryken.Video.Effects.Core
 {
     public sealed class VideoEffectHandlerCanvasArgs : IDisposable
     {

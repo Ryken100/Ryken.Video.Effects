@@ -9,7 +9,7 @@ using Windows.Graphics.DirectX.Direct3D11;
 using Windows.Graphics.Imaging;
 using Windows.Media;
 
-namespace Ryken.Video.Effects
+namespace Ryken.Video.Effects.Core
 {
     class VideoEffectHandlerArgs : IVideoEffectHandlerArgs
     {
