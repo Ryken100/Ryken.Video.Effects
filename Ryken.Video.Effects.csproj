@@ -127,6 +127,7 @@
     <Compile Include="IVideoEffectHandler.cs" />
     <Compile Include="IVideoEffectHandlerArgs.cs" />
     <Compile Include="SaturationEffectHandler.cs" />
+    <Compile Include="SimpleEffectHandlerBase.cs" />
     <Compile Include="VideoEffect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VideoEffectHandlerArgs.cs" />
