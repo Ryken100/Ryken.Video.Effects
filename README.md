@@ -1,5 +1,5 @@
 # Ryken.Video.Effects
-A WinRT component to make it a little easier for you to render videos with Win2D effects.
+A .NET UWP library to make it a little easier for you to render videos with Win2D effects.
 
 # Using this component
 All code below this point assumes you've imported the `Ryken.Video.Effects` namespace.
