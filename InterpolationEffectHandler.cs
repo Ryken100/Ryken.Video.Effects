@@ -9,7 +9,14 @@ namespace Ryken.Video.Effects
 {
     public sealed class InterpolationEffectHandler : IVideoEffectHandler
     {
+        /// <summary>
+        /// The interpolation mode to use when screen resolution is lower than video resolution
+        /// </summary>
         public CanvasImageInterpolation DownscaleInterpolationMode { get; set; } = CanvasImageInterpolation.Linear;
+
+        /// <summary>
+        /// The interpolation mode to use when screen resolution is higher than video resolution
+        /// </summary>
         public CanvasImageInterpolation UpscaleInterpolationMode { get; set; } = CanvasImageInterpolation.Linear;
 
         void IVideoEffectHandler.ProcessFrame(IVideoEffectHandlerArgs args)

@@ -9,7 +9,14 @@ namespace Ryken.Video.Effects
 {
     public sealed class GaussianBlurEffectHandler : IVideoEffectHandler
     {
+        /// <summary>
+        /// Gets or sets the amount of blur to be applied to the image.
+        /// </summary>
         public float BlurAmount { get; set; } = 10;
+
+        /// <summary>
+        /// Level of performance optimization.
+        /// </summary>
         public EffectOptimization Optimization { get; set; } = EffectOptimization.Speed;
 
         void IVideoEffectHandler.CreateResources()

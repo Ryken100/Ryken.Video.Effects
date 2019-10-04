@@ -11,6 +11,9 @@ namespace Ryken.Video.Effects
     {
         SaturationEffect sat;
 
+        /// <summary>
+        /// Gets or sets saturation intensity. 0 = fully desaturated (greyscale), 1 = normal saturation.
+        /// </summary>
         public float Saturation { get; set; } = 1;
 
         void IVideoEffectHandler.ProcessFrame(IVideoEffectHandlerArgs args)
