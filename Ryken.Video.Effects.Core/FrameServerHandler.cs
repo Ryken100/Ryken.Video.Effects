@@ -141,7 +141,7 @@ namespace Ryken.Video.Effects.Core
             double containerRatio = Container.ActualWidth / Container.ActualHeight, videoRatio = (double)Player.PlaybackSession.NaturalVideoWidth / Player.PlaybackSession.NaturalVideoHeight;
 
             double dW, dH;
-            if (containerRatio < videoRatio)
+            if (containerRatio >= videoRatio)
             {
                 dH = Container.ActualHeight;
                 dW = dH * videoRatio;
