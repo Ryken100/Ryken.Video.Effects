@@ -14,9 +14,9 @@ D2D_PS_ENTRY(main)
 	float4 currentCol;
 	float4 finalCol = color;
 	float distance = 1000;
-	for (float i = -1; i <= 1; i++)
+	for (float i = -1; i <= 1; i+=0.5)
 	{
-		for (float o = -1; o <= 1; o++)
+		for (float o = -1; o <= 1; o+=0.5)
 		{
 			currentCol = D2DSampleInputAtOffset(1, float2(i, o) * PixelScale);
 			float dist = abs(color.r - currentCol.r) + abs(color.g - currentCol.g) + abs(color.b - currentCol.b);
@@ -27,6 +27,7 @@ D2D_PS_ENTRY(main)
 			}
 		}
 	}
-
-	return finalCol;
+	float colAvg = (color.r + color.g + color.b) / 3;
+	float finalAvg = (finalCol.r + finalCol.g + finalCol.b) / 3;
+	return finalCol * (colAvg / finalAvg);
 }

@@ -161,6 +161,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Shader Code\DirectionalBlur.hlsl" />
     <Content Include="Shader Code\HQ2X.hlsl" />
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +178,8 @@
   <PropertyGroup>
     <PreBuildEvent>call "$(DevEnvDir)../../VC/Auxiliary/Build/vcvarsall.bat" x64
 cd "$(ProjectDir)Shader Code\"
-call "ShaderBuild.bat" HQ2X</PreBuildEvent>
+call "ShaderBuild.bat" HQ2X
+call "ShaderBuild.bat" DirectionalBlur</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
