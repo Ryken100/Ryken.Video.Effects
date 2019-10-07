@@ -18,7 +18,8 @@ namespace Ryken.Video.Effects.Core
     public static class VideoEffectManager
     {
         static object listLock = new object();
-        const string IDKey = "ID";
+        internal const string IDKey = "ID";
+        internal const string InstanceIDKey = "04C7A1F5-3C71-40F8-9E3A-3DCB898E32C9";
 
         static List<FrameServerHandler> frameServerHandlers = new List<FrameServerHandler>();
         static Dictionary<string, List<WeakReference<IVideoEffectHandler>>> handlers = new Dictionary<string, List<WeakReference<IVideoEffectHandler>>>();
@@ -46,7 +47,7 @@ namespace Ryken.Video.Effects.Core
                 properties.Add(IDKey, id);
             if (frameServerHandlers.Count(h => h.Player == mediaPlayer && h.ID == id) > 0)
                 throw new InvalidOperationException("This player has already been registered with this ID in frame server mode");
-            var handler = new FrameServerHandler(mediaPlayer, container, id, properties);
+            var handler = new FrameServerHandler(mediaPlayer, container, id, Guid.NewGuid().ToString(), properties);
             frameServerHandlers.Add(handler);
         }
         public static void RemoveFrameServerVideoEffect(MediaPlayer mediaPlayer)
@@ -92,6 +93,7 @@ namespace Ryken.Video.Effects.Core
             }
             if (!properties.ContainsKey(IDKey))
                 properties.Add(IDKey, id);
+            properties.Add(InstanceIDKey, Guid.NewGuid().ToString());
             mediaElement.AddVideoEffect(typeof(VideoEffect).FullName, false, properties);
         }
 
@@ -114,6 +116,7 @@ namespace Ryken.Video.Effects.Core
             }
             if (!properties.ContainsKey(IDKey))
                 properties.Add(IDKey, id);
+            properties.Add(InstanceIDKey, Guid.NewGuid().ToString());
             mediaPlayer.AddVideoEffect(typeof(VideoEffect).FullName, false, properties);
         }
 
@@ -135,6 +138,7 @@ namespace Ryken.Video.Effects.Core
             }
             if (!properties.ContainsKey(IDKey))
                 properties.Add(IDKey, id);
+            properties.Add(InstanceIDKey, Guid.NewGuid().ToString());
             mediaClip.VideoEffectDefinitions.Add(new VideoEffectDefinition(typeof(VideoEffect).FullName, properties));
         }
 

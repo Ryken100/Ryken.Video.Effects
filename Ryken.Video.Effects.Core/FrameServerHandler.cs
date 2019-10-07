@@ -25,6 +25,7 @@ namespace Ryken.Video.Effects.Core
         object ResourceLock = new object();
         public MediaPlayer Player { get; }
         public string ID { get; internal set; }
+        public string InstanceID { get; internal set; }
         public FrameworkElement Container { get; }
         public IPropertySet Properties { get; }
         CanvasRenderTarget destinationTarget, sourceTarget;
@@ -35,11 +36,12 @@ namespace Ryken.Video.Effects.Core
         Compositor Compositor { get; }
         SpriteVisual SpriteVisual { get; }
         CompositionSurfaceBrush SurfaceBrush { get; }
-        public FrameServerHandler(MediaPlayer player, FrameworkElement container, string id, IPropertySet properties)
+        public FrameServerHandler(MediaPlayer player, FrameworkElement container, string id, string instanceId, IPropertySet properties)
         {
             CanvasDevice = CanvasDevice.GetSharedDevice();
             Container = container;
             ID = id;
+            InstanceID = instanceId;
             Player = player;
             ContainerVisual = ElementCompositionPreview.GetElementVisual(container);
             Compositor = ContainerVisual.Compositor;
@@ -103,6 +105,7 @@ namespace Ryken.Video.Effects.Core
                         InputFrame = sourceTarget,
                         OutputFrame = destinationTarget,
                         ID = ID,
+                        InstanceID = InstanceID,
                         Properties = Properties,
                         Device = CanvasDevice
                     };

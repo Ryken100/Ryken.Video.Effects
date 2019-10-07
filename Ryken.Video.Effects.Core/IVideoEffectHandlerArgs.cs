@@ -35,6 +35,11 @@ namespace Ryken.Video.Effects.Core
         /// Properties used when creating the effect
         /// </summary>
         IPropertySet Properties { get; }
+
+        /// <summary>
+        /// A randomly generated ID used to identify different media players that have the same effect ID
+        /// </summary>
+        string InstanceID { get; }
         /*
         /// <summary>
         /// Get Win2D drawing arguments for these event args. Call VideoEffectHandlerCanvasArgs.Dispose() when done, or use a `using` block.

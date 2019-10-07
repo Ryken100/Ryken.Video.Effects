@@ -22,7 +22,9 @@ namespace Ryken.Video.Effects.Core
         public string ID { get; internal set; }
         
         public IPropertySet Properties { get; internal set; }
-        
+
+        public string InstanceID { get; internal set; }
+
         /*public virtual VideoEffectHandlerCanvasArgs GetDisposableCanvasArgs()
         {
             var args = new VideoEffectHandlerCanvasArgs()

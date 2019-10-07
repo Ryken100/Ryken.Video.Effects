@@ -13,7 +13,7 @@ namespace Ryken.Video.Effects.Core
 {
     public sealed class VideoEffect : IBasicVideoEffect
     {
-        string id;
+        string id, instanceId;
         CanvasDevice device;
         IPropertySet properties;
         public VideoEffect()
@@ -35,6 +35,7 @@ namespace Ryken.Video.Effects.Core
                 var args = new VideoEffectHandlerArgs()
                 {
                     ID = id,
+                    InstanceID = instanceId,
                     Device = device,
                     InputFrame = input,
                     OutputFrame = output,
@@ -64,10 +65,18 @@ namespace Ryken.Video.Effects.Core
 
         public void SetProperties(IPropertySet configuration)
         {
-            if (configuration.ContainsKey("ID"))
+            if (configuration.ContainsKey(VideoEffectManager.IDKey))
             {
-                this.id = configuration["ID"] as string;
-                properties = properties;
+                id = configuration[VideoEffectManager.IDKey] as string;
+                if (configuration.ContainsKey(VideoEffectManager.InstanceIDKey))
+                {
+                    instanceId = configuration[VideoEffectManager.InstanceIDKey] as string;
+                }
+                else
+                {
+                    throw new InvalidOperationException("VideoEffect property 'InstanceID' not set");
+                }
+                properties = configuration;
             }
             else
             {
