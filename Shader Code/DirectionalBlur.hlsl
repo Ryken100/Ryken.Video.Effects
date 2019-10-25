@@ -9,10 +9,12 @@ D2D_PS_ENTRY(main)
 {
 	float4 color = (float4)0;
 	float count = 0;
+	float mul;
 	for (float i = -1; i <= 1; i += 0.25)
 	{
-		color += D2DSampleInputAtOffset(0, normalize(Direction) * Radius * i * 0.5);
-		count++;
+		mul = 1 - abs(i);
+		color += D2DSampleInputAtOffset(0, normalize(Direction) * Radius * i * 0.5) * mul;
+		count += mul;
 	}
 	return color / count;
 }

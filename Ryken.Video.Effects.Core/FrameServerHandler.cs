@@ -38,7 +38,7 @@ namespace Ryken.Video.Effects.Core
         CompositionSurfaceBrush SurfaceBrush { get; }
         public FrameServerHandler(MediaPlayer player, FrameworkElement container, string id, string instanceId, IPropertySet properties)
         {
-            CanvasDevice = CanvasDevice.GetSharedDevice();
+            CanvasDevice = new CanvasDevice();
             Container = container;
             ID = id;
             InstanceID = instanceId;
@@ -68,7 +68,7 @@ namespace Ryken.Video.Effects.Core
 
         private void CanvasDevice_DeviceLost(CanvasDevice sender, object args)
         {
-            
+
         }
 
         private void Container_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -100,19 +100,22 @@ namespace Ryken.Video.Effects.Core
             {
                 lock (ResourceLock)
                 {
-                    var args = new VideoEffectHandlerArgs()
+                    //using (CanvasDevice.Lock())
                     {
-                        InputFrame = sourceTarget,
-                        OutputFrame = destinationTarget,
-                        ID = ID,
-                        InstanceID = InstanceID,
-                        Properties = Properties,
-                        Device = CanvasDevice
-                    };
-                    bool effectsAdded = VideoEffectManager.ProcessFrame(args);
-                    using (var ds = CanvasComposition.CreateDrawingSession(DrawingSurface))
-                    {
-                        ds.DrawImage(destinationTarget);
+                        var args = new VideoEffectHandlerArgs()
+                        {
+                            InputFrame = sourceTarget,
+                            OutputFrame = destinationTarget,
+                            ID = ID,
+                            InstanceID = InstanceID,
+                            Properties = Properties,
+                            Device = CanvasDevice
+                        };
+                        bool effectsAdded = VideoEffectManager.ProcessFrame(args);
+                        using (var ds = CanvasComposition.CreateDrawingSession(DrawingSurface))
+                        {
+                            ds.DrawImage(destinationTarget);
+                        }
                     }
                 }
             }

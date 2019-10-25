@@ -163,6 +163,7 @@
   <ItemGroup>
     <Content Include="Shader Code\DirectionalBlur.hlsl" />
     <Content Include="Shader Code\HQ2X.hlsl" />
+    <Content Include="Shader Code\SSimSuperRes.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ShaderBin\*.bin" />
