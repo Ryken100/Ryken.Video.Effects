@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Ryken.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -159,7 +158,7 @@ namespace Ryken.Video.Effects.Core
             }
             // Multiply the width and height of the UI container by the device's scale factor
             var display = DisplayInformation.GetForCurrentView();
-            int width = (int)MyMath.Round(dW* display.RawPixelsPerViewPixel), height = (int)MyMath.Round(dH * display.RawPixelsPerViewPixel);
+            int width = (int)PrivateExtensions.Round(dW* display.RawPixelsPerViewPixel), height = (int)PrivateExtensions.Round(dH * display.RawPixelsPerViewPixel);
 
             if (width < 1 || height < 1)
                 return;
