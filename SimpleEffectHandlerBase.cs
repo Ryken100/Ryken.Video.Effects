@@ -11,6 +11,9 @@ namespace Ryken.Video.Effects
     public abstract class SimpleEffectHandlerBase<T> : IVideoEffectHandler where T : ICanvasEffect, new()
     {
         T effect;
+
+        public bool IsEnabled { get; set; } = true;
+
         void IVideoEffectHandler.CreateResources()
         {
             effect = new T();
@@ -21,13 +24,14 @@ namespace Ryken.Video.Effects
             effect.Dispose();
         }
 
-        void IVideoEffectHandler.ProcessFrame(IVideoEffectHandlerArgs args)
+        bool IVideoEffectHandler.ProcessFrame(IVideoEffectHandlerArgs args)
         {
             SetEffectProperties(args, effect);
             using (var session = args.OutputFrame.CreateDrawingSession())
             {
                 session.DrawImage(effect, args.OutputFrame.Bounds, args.InputFrame.Bounds);
             }
+            return true;
         }
 
         /// <summary>

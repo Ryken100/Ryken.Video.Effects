@@ -11,6 +11,9 @@ namespace Ryken.Video.Effects
     {
         Dictionary<string, ComplexEffectResources> resourceDict = new Dictionary<string, ComplexEffectResources>();
         int targetCount;
+
+        public bool IsEnabled { get; set; } = true;
+
         protected ComplexEffectHandlerBase()
         {
             targetCount = GetRenderTargetCount();
@@ -30,7 +33,7 @@ namespace Ryken.Video.Effects
             this.DestroyResources();
         }
 
-        void IVideoEffectHandler.ProcessFrame(IVideoEffectHandlerArgs args)
+        bool IVideoEffectHandler.ProcessFrame(IVideoEffectHandlerArgs args)
         {
             if (!resourceDict.TryGetValue(args.InstanceID, out var resources))
             {
@@ -38,11 +41,11 @@ namespace Ryken.Video.Effects
                 resourceDict.Add(args.InstanceID, resources);
             }
             resources.HandlerArgs = args;
-            ProcessFrame(args, resources);
+            return ProcessFrame(args, resources);
         }
         protected abstract void CreateResources();
         protected abstract void DestroyResources();
-        protected abstract void ProcessFrame(IVideoEffectHandlerArgs args, ComplexEffectResources resources);
+        protected abstract bool ProcessFrame(IVideoEffectHandlerArgs args, ComplexEffectResources resources);
         protected internal abstract RenderTargetCreationArgs GetRenderTargetCreationArgs(int renderTargetIndex, IVideoEffectHandlerArgs args);
         protected abstract int GetRenderTargetCount();
     }

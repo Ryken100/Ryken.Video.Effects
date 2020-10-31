@@ -24,9 +24,9 @@ namespace Ryken.Video.Effects
             return 2;
         }
 
-        protected override void ProcessFrame(IVideoEffectHandlerArgs args, ComplexEffectResources resources)
+        protected override bool ProcessFrame(IVideoEffectHandlerArgs args, ComplexEffectResources resources)
         {
-            
+            throw new NotImplementedException();
         }
 
         protected internal override RenderTargetCreationArgs GetRenderTargetCreationArgs(int renderTargetIndex, IVideoEffectHandlerArgs args)

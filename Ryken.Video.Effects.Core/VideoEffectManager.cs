@@ -16,9 +16,10 @@ namespace Ryken.Video.Effects.Core
 {
     public static class VideoEffectManager
     {
+        public static string VideoEffectClassId { get; } = typeof(VideoEffect).FullName;
         static object listLock = new object();
-        internal const string IDKey = "ID";
-        internal const string InstanceIDKey = "04C7A1F5-3C71-40F8-9E3A-3DCB898E32C9";
+        public static string IDKey { get; } = "ID";
+        public static string InstanceIDKey { get; } = "04C7A1F5-3C71-40F8-9E3A-3DCB898E32C9";
 
         static List<FrameServerHandler> frameServerHandlers = new List<FrameServerHandler>();
         static Dictionary<string, List<WeakReference<IVideoEffectHandler>>> handlers = new Dictionary<string, List<WeakReference<IVideoEffectHandler>>>();
@@ -93,7 +94,7 @@ namespace Ryken.Video.Effects.Core
             if (!properties.ContainsKey(IDKey))
                 properties.Add(IDKey, id);
             properties.Add(InstanceIDKey, Guid.NewGuid().ToString());
-            mediaElement.AddVideoEffect(typeof(VideoEffect).FullName, false, properties);
+            mediaElement.AddVideoEffect(VideoEffectClassId, false, properties);
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace Ryken.Video.Effects.Core
             if (!properties.ContainsKey(IDKey))
                 properties.Add(IDKey, id);
             properties.Add(InstanceIDKey, Guid.NewGuid().ToString());
-            mediaPlayer.AddVideoEffect(typeof(VideoEffect).FullName, false, properties);
+            mediaPlayer.AddVideoEffect(VideoEffectClassId, false, properties);
         }
 
         /// <summary>
@@ -138,7 +139,7 @@ namespace Ryken.Video.Effects.Core
             if (!properties.ContainsKey(IDKey))
                 properties.Add(IDKey, id);
             properties.Add(InstanceIDKey, Guid.NewGuid().ToString());
-            mediaClip.VideoEffectDefinitions.Add(new VideoEffectDefinition(typeof(VideoEffect).FullName, properties));
+            mediaClip.VideoEffectDefinitions.Add(new VideoEffectDefinition(VideoEffectClassId, properties));
         }
 
         /// <summary>
@@ -317,9 +318,14 @@ namespace Ryken.Video.Effects.Core
                                     }
                                 }
                             }
-                            handler.ProcessFrame(args);
-                            firstComplete = true;
-                            returnVal = true;
+                            if (handler.IsEnabled)
+                            {
+                                if (handler.ProcessFrame(args))
+                                {
+                                    firstComplete = true;
+                                    returnVal = true;
+                                }
+                            }
                         }
                     }
                 }

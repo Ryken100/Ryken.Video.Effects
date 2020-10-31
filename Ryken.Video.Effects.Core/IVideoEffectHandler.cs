@@ -11,7 +11,8 @@ namespace Ryken.Video.Effects.Core
     /// </summary>
     public interface IVideoEffectHandler
     {
-        void ProcessFrame(IVideoEffectHandlerArgs args);
+        bool IsEnabled { get; set; }
+        bool ProcessFrame(IVideoEffectHandlerArgs args);
         void CreateResources();
         void DestroyResources();
     }
