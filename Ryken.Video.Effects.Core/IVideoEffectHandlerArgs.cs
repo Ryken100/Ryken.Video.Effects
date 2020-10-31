@@ -40,6 +40,11 @@ namespace Ryken.Video.Effects.Core
         /// A randomly generated ID used to identify different media players that have the same effect ID
         /// </summary>
         string InstanceID { get; }
+
+        /// <summary>
+        /// The time stamp of the current frame
+        /// </summary>
+        TimeSpan? Position { get; }
         /*
         /// <summary>
         /// Get Win2D drawing arguments for these event args. Call VideoEffectHandlerCanvasArgs.Dispose() when done, or use a `using` block.

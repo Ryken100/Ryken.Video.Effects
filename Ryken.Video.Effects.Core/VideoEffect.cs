@@ -23,7 +23,6 @@ namespace Ryken.Video.Effects.Core
 
         public void SetEncodingProperties(VideoEncodingProperties encodingProperties, IDirect3DDevice device)
         {
-            //this.device = CanvasDevice.GetSharedDevice();
             this.device = CanvasDevice.CreateFromDirect3D11Device(device);
         }
 
@@ -39,7 +38,8 @@ namespace Ryken.Video.Effects.Core
                     Device = device,
                     InputFrame = input,
                     OutputFrame = output,
-                    Properties = properties
+                    Properties = properties,
+                    Position = context.InputFrame.RelativeTime
                 };
                 VideoEffectManager.ProcessFrame(args);
             }

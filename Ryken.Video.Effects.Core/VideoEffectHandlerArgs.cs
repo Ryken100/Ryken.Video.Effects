@@ -25,6 +25,8 @@ namespace Ryken.Video.Effects.Core
 
         public string InstanceID { get; internal set; }
 
+        public TimeSpan? Position { get; internal set; }
+
         /*public virtual VideoEffectHandlerCanvasArgs GetDisposableCanvasArgs()
         {
             var args = new VideoEffectHandlerCanvasArgs()
