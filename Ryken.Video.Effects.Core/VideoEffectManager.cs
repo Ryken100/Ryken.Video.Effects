@@ -294,7 +294,7 @@ namespace Ryken.Video.Effects.Core
             }
         }
 
-        internal static bool ProcessFrame(IVideoEffectHandlerArgs args)
+        public static bool ProcessFrame(IVideoEffectHandlerArgs args)
         {
             bool returnVal = false;
             if (!string.IsNullOrWhiteSpace(args.ID) && handlers.TryGetValue(args.ID, out var list))

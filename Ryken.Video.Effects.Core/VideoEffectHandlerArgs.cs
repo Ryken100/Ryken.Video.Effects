@@ -11,7 +11,7 @@ using Windows.Media;
 
 namespace Ryken.Video.Effects.Core
 {
-    class VideoEffectHandlerArgs : IVideoEffectHandlerArgs
+    public sealed class VideoEffectHandlerArgs : IVideoEffectHandlerArgs
     {
         public CanvasBitmap InputFrame { get; internal set; }
         
@@ -26,6 +26,19 @@ namespace Ryken.Video.Effects.Core
         public string InstanceID { get; internal set; }
 
         public TimeSpan? Position { get; internal set; }
+
+        internal VideoEffectHandlerArgs() { }
+
+        public VideoEffectHandlerArgs(CanvasDevice device, CanvasBitmap inputFrame, CanvasRenderTarget outputFrame, string id, string instanceId, IPropertySet properties, TimeSpan? position)
+        {
+            Device = device;
+            InputFrame = inputFrame;
+            OutputFrame = outputFrame;
+            ID = id;
+            InstanceID = instanceId;
+            Properties = properties;
+            Position = position;
+        }
 
         /*public virtual VideoEffectHandlerCanvasArgs GetDisposableCanvasArgs()
         {
