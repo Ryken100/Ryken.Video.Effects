@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
@@ -23,6 +24,7 @@ namespace Ryken.Video.Effects.Core
 
         static List<FrameServerHandler> frameServerHandlers = new List<FrameServerHandler>();
         static Dictionary<string, List<WeakReference<IVideoEffectHandler>>> handlers = new Dictionary<string, List<WeakReference<IVideoEffectHandler>>>();
+        static Dictionary<string, TransformParams> transforms = new Dictionary<string, TransformParams>();
 
         /// <summary>
         /// Adds a video effect to the MediaPlayer that uses MediaPlayer.IsVideoFrameServerEnabled instead of IBasicVideoEffect
@@ -140,6 +142,29 @@ namespace Ryken.Video.Effects.Core
                 properties.Add(IDKey, id);
             properties.Add(InstanceIDKey, Guid.NewGuid().ToString());
             mediaClip.VideoEffectDefinitions.Add(new VideoEffectDefinition(VideoEffectClassId, properties));
+        }
+
+        /// <summary>
+        /// Specifies how drawing sessions in IVideoEffectHandlers should be scaled
+        /// </summary>
+        /// <param name="id">The ID of the media source</param>
+        /// <param name="type">The type of transform that should be applied</param>
+        /// <param name="targetSize">The target size that the drawing session should be scaled to, based on the transform type specified</param>
+        public static void SetDrawingSessionTransform(string id, TransformType type, Vector2 targetSize)
+        {
+            if (!transforms.ContainsKey(id))
+                transforms.Add(id, new TransformParams(type, targetSize));
+            else transforms[id] = new TransformParams(type, targetSize);
+        }
+
+        /// <summary>
+        /// Removes a previously set drawing session transform
+        /// </summary>
+        /// <param name="id">The ID of the media source</param>
+        public static void RemoveDrawingSessionTransform(string id)
+        {
+            if (transforms.ContainsKey(id))
+                transforms.Remove(id);
         }
 
         /// <summary>
@@ -301,6 +326,18 @@ namespace Ryken.Video.Effects.Core
             {
                 lock (listLock)
                 {
+                    if (args is ITransformableVideoEffectHandlerArgs trans)
+                    {
+                        if (transforms.TryGetValue(args.ID, out var transform))
+                        {
+                            transform.GetMatrixTransform(args.OutputFrame.Size.ToVector2(), out var matrix, out var size);
+                            trans.SetTransform(matrix, size);
+                        }
+                        else
+                        {
+                            trans.SetTransform(Matrix3x2.Identity, args.OutputFrame.Size.ToVector2());
+                        }
+                    }
                     bool firstComplete = false;
                     foreach (var weakRef in list)
                     {

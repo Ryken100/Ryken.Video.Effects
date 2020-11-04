@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +47,7 @@
     <DebugType>full</DebugType>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <PlatformTarget>x86</PlatformTarget>
@@ -122,10 +124,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FrameServerHandler.cs" />
+    <Compile Include="ITransformableVideoEffectHandlerArgs.cs" />
     <Compile Include="IVideoEffectHandler.cs" />
     <Compile Include="IVideoEffectHandlerArgs.cs" />
     <Compile Include="PrivateExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransformParams.cs" />
+    <Compile Include="TransformType.cs" />
     <Compile Include="VideoEffect.cs" />
     <Compile Include="VideoEffectHandlerArgs.cs" />
     <Compile Include="VideoEffectHandlerCanvasArgs.cs" />
