@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Platforms>x64;x86;ARM64</Platforms>
+    <Platform Condition="'$(Platform)' == 'AnyCPU' and $(RuntimeIdentifier.EndsWith('-x86'))">x86</Platform>
+    <Platform Condition="'$(Platform)' == 'AnyCPU' and $(RuntimeIdentifier.EndsWith('-arm64'))">ARM64</Platform>
+    <Platform Condition="'$(Platform)' == 'AnyCPU'">x64</Platform>
+    <PlatformTarget Condition="'$(PlatformTarget)' == ''">$(Platform)</PlatformTarget>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <UseUwp>true</UseUwp>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <LangVersion>preview</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>Ryken.Video.Effects</RootNamespace>
+    <AssemblyName>Ryken.Video.Effects</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Ryken*\**" />
+    <EmbeddedResource Remove="Ryken*\**" />
+    <None Remove="Ryken*\**" />
+    <Page Remove="Ryken*\**" />
+    <None Remove="**\bin\**" />
+    <None Remove="**\obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.3.1" />
+    <PackageReference Include="Win2D.uwp" Version="1.28.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Ryken.Video.Effects.Core\Ryken.Video.Effects.Core.NET.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Shader Code\DirectionalBlur.hlsl" />
+    <Content Include="Shader Code\HQ2X.hlsl" />
+    <Content Include="Shader Code\SSimSuperRes.hlsl" />
+    <EmbeddedResource Include="ShaderBin\*.bin" />
+  </ItemGroup>
+</Project>
